@@ -1,20 +1,17 @@
-﻿FROM python:3.11-slim
+FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY app ./app
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir \
-    fastapi \
-    uvicorn[standard] \
-    jinja2 \
-    sqlalchemy \
-    python-multipart
+COPY . .
 
-# Banco fora da arvore da app para persistencia por volume
+RUN mkdir -p /app/uploads
+
 ENV DB_PATH=/data/cashback.db
 
 EXPOSE 8000
