@@ -1,0 +1,8 @@
+    if receipt and receipt.filename:
+        ext = os.path.splitext(receipt.filename)[1].lower()         if ext != '.pdf':             ext = '.pdf'         filename = datetime.utcnow().strftime('%Y%m%d%H%M%S') + '_' + uuid4().hex + ext
+        dest = os.path.join(UPLOAD_DIR, filename)
+        with open(dest, "wb") as f:
+            shutil.copyfileobj(receipt.file, f)
+        receipt_path = os.path.relpath(dest, os.getcwd())
+
+    def parse_date(val: str | None):

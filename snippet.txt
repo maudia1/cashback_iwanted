@@ -1,0 +1,12 @@
+                Employee(name="Ana", store_id=s1.id),
+                    Employee(name="Bruno", store_id=s1.id),
+                    Employee(name="Carla", store_id=s2.id),
+                ]
+            )
+            db.commit()
+    finally:
+        db.close()
+
+
+@app.get("/")
+def index(r
